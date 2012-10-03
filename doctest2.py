@@ -2043,7 +2043,7 @@ def set_unittest_reportflags(flags):
     The old flag is returned so that a runner could restore the old
     value if it wished to:
 
-      >>> import doctest
+      >>> import doctest2
       >>> old = doctest2._unittest_reportflags
       >>> doctest2.set_unittest_reportflags(REPORT_NDIFF |
       ...                          REPORT_ONLY_FIRST_FAILURE) == old
