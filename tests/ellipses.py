@@ -1,5 +1,7 @@
 """Allow the use of ellipses to ignore part of the output.
 
+Issue #14 (https://github.com/ianb/doctest2/issues/14)
+
 Problem
 -------
 

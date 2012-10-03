@@ -7,6 +7,8 @@ import doctest2
 
 test_files = [
     'tests/ellipses.py',
+    'tests/blankline.py',
+    'tests/hex_address.py',
 ]
 
 if __name__ == '__main__':
