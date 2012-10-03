@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print(filename)
         print("=" * 30)
 
-        doctest2.testfile(filename, verbose=True)
+        doctest2.testfile(filename, verbose=False)
 
         print("")
 
