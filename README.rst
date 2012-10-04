@@ -30,6 +30,10 @@ For now, just run the test script::
 
     $ python test.py
 
+Or if you like verbose output::
+
+    $ python test.py -v
+
 This covers all files in the ``tests`` directory, as well as doctests in
 ``doctest2.py`` itself.
 
