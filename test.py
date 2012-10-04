@@ -3,30 +3,20 @@
 """Run all tests.
 """
 
+from glob import glob
 import doctest2
 
-test_files = [
-    'tests/ellipses.py',
-    'tests/blankline.py',
-    'tests/hex_address.py',
-]
-
-if __name__ == '__main__':
-    # self-test
+def summarize(filename, statuses):
     print("=" * 30)
-    print("doctest2.py")
+    print(filename)
     print("-" * 30)
-    failures, tests = doctest2.testmod(doctest2)
+    failures, tests = statuses
     print("%d tests, %d failures" % (tests, failures))
     print("=" * 30)
     print("")
 
-    for filename in test_files:
-        print("=" * 30)
-        print(filename)
-        print("-" * 30)
-        failures, tests = doctest2.testfile(filename, verbose=False)
-        print("%d tests, %d failures" % (tests, failures))
-        print("=" * 30)
-        print("")
+if __name__ == '__main__':
+    summarize('doctest2.py', doctest2.testmod(doctest2))
+    for filename in glob('./tests/*.py'):
+        summarize(filename, doctest2.testfile(filename, verbose=False))
 
