@@ -34,8 +34,8 @@ Or if you like verbose output::
 
     $ python test.py -v
 
-This covers all files in the ``tests`` directory, as well as doctests in
-``doctest2.py`` itself.
+This covers all ``.rst`` files in the ``tests`` directory, as well as doctests
+in ``doctest2.py`` itself.
 
 
 .. _doctest2: http://github.com/ianb/doctest2
