@@ -23,6 +23,6 @@ if __name__ == '__main__':
         verbose = False
 
     summarize('doctest2.py', doctest2.testmod(doctest2))
-    for filename in glob('./tests/*.py'):
+    for filename in glob('./tests/*.rst'):
         summarize(filename, doctest2.testfile(filename, verbose=verbose))
 

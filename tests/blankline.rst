@@ -1,6 +1,9 @@
-"""Allow a single period to represent <BLANKLINE>
+Blank lines
+===========
 
-Issue #13 (https://github.com/ianb/doctest2/issues/13)
+Allow a single period to represent ``<BLANKLINE>``
+
+Issue #13: https://github.com/ianb/doctest2/issues/13
 
 Sometimes we want to verify the presence of a blank line in output. The
 official doctest handles this by accepting the ``<BLANKLINE>`` marker.
@@ -20,8 +23,5 @@ in place of the blank line. A single period has been suggested::
     Wait for it...
     .
     Now!
-
-
-"""
 
 

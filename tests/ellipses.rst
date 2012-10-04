@@ -1,11 +1,14 @@
-"""Allow the use of ellipses to ignore part of the output.
+Ellipses
+========
 
-Issue #14 (https://github.com/ianb/doctest2/issues/14)
+Allow the use of ellipses to ignore part of the output.
+
+Issue #14: https://github.com/ianb/doctest2/issues/14
 
 Problem
 -------
 
-Given some multi-line text:
+Given some multi-line text::
 
     >>> menu = "\n".join(["Spam", "Spam", "Eggs", "Spam"])
 
@@ -204,5 +207,4 @@ Maybe even just the beginning and the end::
     Eggs
     Spam
 
-"""
 

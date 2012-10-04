@@ -1,6 +1,9 @@
-"""Allow 0xXXX to match hexadecimal memory addresses.
+Hex addresses
+=============
 
-Issue #4 (https://github.com/ianb/doctest2/issues/4)
+Allow ``0xXXX`` to match hexadecimal memory addresses.
+
+Issue #4: https://github.com/ianb/doctest2/issues/4
 
 It's difficult to verify any output that might include a hexadecimal memory
 address. For example, given a class instance::
@@ -20,5 +23,4 @@ hexadecimal value is here, for example like this::
     >>> print(foo)                          # doctest: +SKIP
     <__main__.Foo instance at 0xXXX>
 
-"""
 
