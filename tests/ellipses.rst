@@ -57,9 +57,8 @@ is identical to the continuation prompt ``...``, as in::
     >>> def foo():
     ...     return 'foo'
 
-It is also greedy, sometimes matching too much. For example, these examples
-fail because the ellipsis swallows up the ending lines before they can be
-matched::
+It is also greedy, sometimes matching too much. These examples fail because the
+ellipsis swallows up the ending lines before they can be matched::
 
     >>> print(menu)      # doctest: +ELLIPSIS, +SKIP
     ...
@@ -111,36 +110,20 @@ what you hope to document and test in the example).
 
 Another essential behavior is for the ellipsis to match no output, or the empty
 string. Again, perhaps you're testing something that may or may not produce
-output, but your test doesn't care whether it does::
+output; maybe it's a nondeterministic function::
 
-    >>> print(menu)         # doctest: +SKIP
-    (...)
-    Spam
-    Spam
-    Eggs
-    Spam
+    >>> import random
+    >>> def meal():
+    ...     if random.choice([True, False]):
+    ...         print("Baked beans")
+    ...     print("Spam")
 
-    >>> print(menu)         # doctest: +SKIP
-    (...)
-    Spam
-    Spam
-    Eggs
-    Spam
-    (...)
+You could still test to make sure you get "Spam", regardless of whether "Baked
+beans" appears::
 
-    >>> print(menu)         # doctest: +SKIP
-    Spam
-    Spam
+    >>> meal()              # doctest: +SKIP
     (...)
-    Eggs
     Spam
-
-    >>> print(menu)         # doctest: +SKIP
-    Spam
-    Spam
-    Eggs
-    Spam
-    (...)
 
 More often, we'll want it to match one or more lines. We may only care about
 the first few lines of the output::
@@ -208,4 +191,27 @@ Maybe even just the beginning and the end::
     Eggs
     Spam
 
+
+Embedded ellipses
+-----------------
+
+One thing that the ``+ELLIPSIS`` directive allows is matching of substrings
+within a line; for example::
+
+    >>> items = ["Spam", "Egg", "Sausage", "Spam"]
+
+    >>> items               # doctest: +ELLIPSIS
+    ['Spam', ..., 'Spam']
+
+This would be a bit ugly using the new ``(...)`` marker::
+
+    >>> items               # doctest: +SKIP
+    ['Spam', (...), 'Spam']
+
+In this context, ``...`` would not be confused with the continuation marker, so
+it might be possible to simply handle it automatically, without needing the
+``+ELLIPSIS`` directive::
+
+    >>> items               # doctest: +SKIP
+    ['Spam', ..., 'Spam']
 
