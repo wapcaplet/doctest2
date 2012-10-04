@@ -1,9 +1,10 @@
 Ellipses
 ========
 
-Allow the use of ellipses to ignore part of the output.
+Improve support for ellipses for ignoring part of the output.
 
 Issue #14: https://github.com/ianb/doctest2/issues/14
+
 
 Problem
 -------
@@ -85,9 +86,9 @@ Solution
 
 We would like to have a new ellipsis marker that:
 
-    - Does not conflict with the continuation prompt ``...``
-    - Does not greedily match too much
-    - Does not require including an ``+ELLIPSIS`` directive
+- Does not conflict with the continuation prompt ``...``
+- Does not greedily match too much
+- Does not require including an ``+ELLIPSIS`` directive
 
 Using a new marker such as ``(...)`` could solve the first two problems, while
 the third could, one hopes, be handled with a bit of regexp cleverness.

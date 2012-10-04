@@ -12,7 +12,8 @@ address. For example, given a class instance::
     ...     pass
     >>> foo = Foo()
 
-The default ``repr`` for the instance contains a hexadecimal value::
+The default ``repr`` for the instance contains an unpredictable hexadecimal
+value::
 
     >>> print(foo)                          # doctest: +SKIP
     <__main__.Foo instance at 0x13c1638>
