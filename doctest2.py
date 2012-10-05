@@ -1773,7 +1773,7 @@ class DebugRunner(DocTestRunner):
          >>> runner.run(test)
          Traceback (most recent call last):
          ...
-         doctest.UnexpectedException: <DocTest foo from foo.py:0 (2 examples)>
+         doctest2.UnexpectedException: <DocTest foo from foo.py:0 (2 examples)>
 
          >>> del test.globs['__builtins__']
          >>> test.globs
@@ -2076,24 +2076,24 @@ def set_unittest_reportflags(flags):
     The old flag is returned so that a runner could restore the old
     value if it wished to:
 
-      >>> import doctest
-      >>> old = doctest._unittest_reportflags
-      >>> doctest.set_unittest_reportflags(REPORT_NDIFF |
+      >>> import doctest2
+      >>> old = doctest2._unittest_reportflags
+      >>> doctest2.set_unittest_reportflags(REPORT_NDIFF |
       ...                          REPORT_ONLY_FIRST_FAILURE) == old
       True
 
-      >>> doctest._unittest_reportflags == (REPORT_NDIFF |
+      >>> doctest2._unittest_reportflags == (REPORT_NDIFF |
       ...                                   REPORT_ONLY_FIRST_FAILURE)
       True
 
     Only reporting flags can be set:
 
-      >>> doctest.set_unittest_reportflags(ELLIPSIS)
+      >>> doctest2.set_unittest_reportflags(ELLIPSIS)
       Traceback (most recent call last):
       ...
       ValueError: ('Only reporting flags allowed', 8)
 
-      >>> doctest.set_unittest_reportflags(old) == (REPORT_NDIFF |
+      >>> doctest2.set_unittest_reportflags(old) == (REPORT_NDIFF |
       ...                                   REPORT_ONLY_FIRST_FAILURE)
       True
     """
