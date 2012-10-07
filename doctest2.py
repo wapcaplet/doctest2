@@ -159,8 +159,8 @@ REPORTING_FLAGS = (REPORT_UDIFF |
                    REPORT_ONLY_FIRST_FAILURE)
 
 # Special string markers for use in `want` strings:
-BLANKLINE_MARKER = '<BLANKLINE>'
-BLANKLINE_MATCH = '(?m)^(%s|\.)\s*?$' % re.escape(BLANKLINE_MARKER)
+BLANKLINE_MARKERS = ('<BLANKLINE>', '.')
+BLANKLINE_MATCH = '(?m)^(%s)\s*?$' % '|'.join(re.escape(marker) for marker in BLANKLINE_MARKERS)
 ELLIPSIS_MARKER = '...'
 
 ######################################################################
@@ -1627,7 +1627,7 @@ class OutputChecker:
         # If <BLANKLINE>s are being used, then replace blank lines
         # with <BLANKLINE> in the actual output string.
         if not (optionflags & DONT_ACCEPT_BLANKLINE):
-            got = re.sub('(?m)^[ ]*(?=\n)', BLANKLINE_MARKER, got)
+            got = re.sub('(?m)^[ ]*(?=\n)', BLANKLINE_MARKERS[0], got)
 
         # Check if we should use diff.
         if self._do_a_fancy_diff(want, got, optionflags):
