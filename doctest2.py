@@ -160,6 +160,7 @@ REPORTING_FLAGS = (REPORT_UDIFF |
 
 # Special string markers for use in `want` strings:
 BLANKLINE_MARKER = '<BLANKLINE>'
+BLANKLINE_MATCH = '(?m)^(%s|\.)\s*?$' % re.escape(BLANKLINE_MARKER)
 ELLIPSIS_MARKER = '...'
 
 ######################################################################
@@ -1566,8 +1567,7 @@ class OutputChecker:
         # blank line, unless the DONT_ACCEPT_BLANKLINE flag is used.
         if not (optionflags & DONT_ACCEPT_BLANKLINE):
             # Replace <BLANKLINE> in want with a blank line.
-            want = re.sub('(?m)^%s\s*?$' % re.escape(BLANKLINE_MARKER),
-                          '', want)
+            want = re.sub(BLANKLINE_MATCH, '', want)
             # If a line in got contains only spaces, then remove the
             # spaces.
             got = re.sub('(?m)^\s*?$', '', got)
