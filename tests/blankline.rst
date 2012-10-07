@@ -27,7 +27,7 @@ in place of the blank line. A single period has been suggested::
     Now!
 
 If you need to verify the literal presence of a single period in the output, you
-can enable the `DONT_ACCEPT_BLANKLINE` flag::
+can enable the ``DONT_ACCEPT_BLANKLINE`` flag::
 
     >>> output = "\n".join(["Literal periods", ".", "."])
     >>> print(output)   # doctest: +DONT_ACCEPT_BLANKLINE
@@ -35,7 +35,7 @@ can enable the `DONT_ACCEPT_BLANKLINE` flag::
     .
     .
 
-The same goes for the literal presence of the string `<BLANKLINE>`::
+The same goes for the literal presence of the string ``<BLANKLINE>``::
 
     >>> output = "\n".join(["Literal <BLANKLINE>", "<BLANKLINE>"])
     >>> print(output)   # doctest: +DONT_ACCEPT_BLANKLINE
