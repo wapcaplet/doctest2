@@ -57,8 +57,9 @@ is identical to the continuation prompt ``...``, as in::
     >>> def foo():
     ...     return 'foo'
 
-It is also greedy, sometimes matching too much. These examples fail because the
-ellipsis swallows up the ending lines before they can be matched::
+This can cause problems when attempting to match arbitrary text at the beginning
+of the output, because the ``...`` is interpreted as a continuation, rather than
+an ellipsis::
 
     >>> print(menu)      # doctest: +ELLIPSIS, +SKIP
     ...
@@ -75,9 +76,9 @@ ellipsis swallows up the ending lines before they can be matched::
     Eggs
     Spam
 
-Finally, there is the aesthetic ugliness of including the ``+ELLIPSIS``
-directive. Anyone reading your documentation can tell from the context what
-``...`` means, so doctest should be able to as well.
+There is the aesthetic ugliness of including the ``+ELLIPSIS`` directive. Anyone
+reading your documentation can tell from the context what ``...`` means, so
+doctest should be able to as well.
 
 
 Solution
@@ -95,7 +96,7 @@ the third could, one hopes, be handled with a bit of regexp cleverness.
 A few essential behaviors could be outlined as follows. First, the new ellipsis
 marker should be able to match all output::
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)         # doctest: +ELLIPSIS
     (...)
 
 This would be equivalent to::
@@ -121,23 +122,23 @@ output; maybe it's a nondeterministic function::
 You could still test to make sure you get "Spam", regardless of whether "Baked
 beans" appears::
 
-    >>> meal()              # doctest: +SKIP
+    >>> meal()          # doctest: +SKIP
     (...)
     Spam
 
 More often, we'll want it to match one or more lines. We may only care about
 the first few lines of the output::
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu) # this one's OK to have a comment here
     Spam
     (...)
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     Spam
     Spam
     (...)
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     Spam
     Spam
     Eggs
@@ -145,17 +146,17 @@ the first few lines of the output::
 
 Or something in the middle::
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     (...)
     Eggs
     (...)
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     (...)
     Spam
     (...)
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     (...)
     Spam
     Eggs
@@ -163,29 +164,29 @@ Or something in the middle::
 
 Or only the end::
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     (...)
     Spam
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     (...)
     Eggs
     Spam
 
 Maybe even just the beginning and the end::
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     Spam
     (...)
     Spam
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     Spam
     Spam
     (...)
     Spam
 
-    >>> print(menu)         # doctest: +SKIP
+    >>> print(menu)
     Spam
     (...)
     Eggs
@@ -205,7 +206,7 @@ within a line; for example::
 
 This would be a bit ugly using the new ``(...)`` marker::
 
-    >>> items               # doctest: +SKIP
+    >>> items
     ['Spam', (...), 'Spam']
 
 In this context, ``...`` would not be confused with the continuation marker, so

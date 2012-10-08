@@ -161,7 +161,8 @@ REPORTING_FLAGS = (REPORT_UDIFF |
 # Special string markers for use in `want` strings:
 BLANKLINE_MARKERS = ('<BLANKLINE>', '.')
 BLANKLINE_MATCH = '(?m)^(%s)\s*?$' % '|'.join(re.escape(marker) for marker in BLANKLINE_MARKERS)
-ELLIPSIS_MARKER = '...'
+OLD_ELLIPSIS_MARKER = '...'
+NEW_ELLIPSIS_MARKER = '(...)'
 
 ######################################################################
 ## Table of Contents
@@ -260,17 +261,18 @@ class _SpoofOut(StringIO):
         StringIO.truncate(self)
 
 # Worst-case linear-time ellipsis matching.
-def _ellipsis_match(want, got):
+def _ellipsis_match(want, got, marker=OLD_ELLIPSIS_MARKER):
     """
     Essentially the only subtle case:
     >>> _ellipsis_match('aa...aa', 'aaa')
     False
     """
-    if ELLIPSIS_MARKER not in want:
+    #pdb.set_trace()
+    if marker not in want:
         return want == got
 
     # Find "the real" strings.
-    ws = want.split(ELLIPSIS_MARKER)
+    ws = want.split(marker)
     assert len(ws) >= 2
 
     # Deal with exact matches possibly needed at one or both ends.
@@ -1586,8 +1588,11 @@ class OutputChecker:
         # The ELLIPSIS flag says to let the sequence "..." in `want`
         # match any substring in `got`.
         if optionflags & ELLIPSIS:
-            if _ellipsis_match(want, got):
+            if _ellipsis_match(want, got, OLD_ELLIPSIS_MARKER):
                 return True
+
+        if _ellipsis_match(want, got, NEW_ELLIPSIS_MARKER):
+            return True
 
         # We didn't find any match; return false.
         return False
