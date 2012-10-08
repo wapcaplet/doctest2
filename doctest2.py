@@ -162,7 +162,7 @@ REPORTING_FLAGS = (REPORT_UDIFF |
 BLANKLINE_MARKERS = ('<BLANKLINE>', '.')
 BLANKLINE_MATCH = '(?m)^(%s)\s*?$' % '|'.join(re.escape(marker) for marker in BLANKLINE_MARKERS)
 OLD_ELLIPSIS_MARKER = '...'
-NEW_ELLIPSIS_MARKER = '(...)'
+NEW_ELLIPSIS_MARKER = '<...>'
 
 ######################################################################
 ## Table of Contents

@@ -90,14 +90,14 @@ We would like to have a new ellipsis marker that:
 - Does not greedily match too much
 - Does not require including an ``+ELLIPSIS`` directive
 
-Using a new marker such as ``(...)`` could solve the first two problems, while
+Using a new marker such as ``<...>`` could solve the first two problems, while
 the third could, one hopes, be handled with a bit of regexp cleverness.
 
 A few essential behaviors could be outlined as follows. First, the new ellipsis
 marker should be able to match all output::
 
     >>> print(menu)         # doctest: +ELLIPSIS
-    (...)
+    <...>
 
 This would be equivalent to::
 
@@ -123,7 +123,7 @@ You could still test to make sure you get "Spam", regardless of whether "Baked
 beans" appears::
 
     >>> meal()          # doctest: +SKIP
-    (...)
+    <...>
     Spam
 
 More often, we'll want it to match one or more lines. We may only care about
@@ -131,45 +131,45 @@ the first few lines of the output::
 
     >>> print(menu) # this one's OK to have a comment here
     Spam
-    (...)
+    <...>
 
     >>> print(menu)
     Spam
     Spam
-    (...)
+    <...>
 
     >>> print(menu)
     Spam
     Spam
     Eggs
-    (...)
+    <...>
 
 Or something in the middle::
 
     >>> print(menu)
-    (...)
+    <...>
     Eggs
-    (...)
+    <...>
 
     >>> print(menu)
-    (...)
+    <...>
     Spam
-    (...)
+    <...>
 
     >>> print(menu)
-    (...)
+    <...>
     Spam
     Eggs
-    (...)
+    <...>
 
 Or only the end::
 
     >>> print(menu)
-    (...)
+    <...>
     Spam
 
     >>> print(menu)
-    (...)
+    <...>
     Eggs
     Spam
 
@@ -177,18 +177,18 @@ Maybe even just the beginning and the end::
 
     >>> print(menu)
     Spam
-    (...)
+    <...>
     Spam
 
     >>> print(menu)
     Spam
     Spam
-    (...)
+    <...>
     Spam
 
     >>> print(menu)
     Spam
-    (...)
+    <...>
     Eggs
     Spam
 
@@ -204,10 +204,10 @@ within a line; for example::
     >>> items               # doctest: +ELLIPSIS
     ['Spam', ..., 'Spam']
 
-This would be a bit ugly using the new ``(...)`` marker::
+This would be a bit ugly using the new ``<...>`` marker::
 
     >>> items
-    ['Spam', (...), 'Spam']
+    ['Spam', <...>, 'Spam']
 
 In this context, ``...`` would not be confused with the continuation marker, so
 it might be possible to simply handle it automatically, without needing the

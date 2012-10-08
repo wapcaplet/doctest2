@@ -80,6 +80,12 @@ class TestBlankline (TestCheckOutput):
         result = self.checker.check_output(want, got, 0)
         self.assertTrue(result)
 
+    def test_accept_whitespace_as_blankline(self):
+        want = "red\n<BLANKLINE>\ngreen"
+        got = "red\n  \t  \ngreen"
+        result = self.checker.check_output(want, got, 0)
+        self.assertTrue(result)
+
     def test_accept_period_for_blankline(self):
         want = "red\n.\ngreen"
         got = "red\n\ngreen"
@@ -123,7 +129,7 @@ class TestEllipsis (TestCheckOutput):
         self.assertTrue(result)
 
     def test_new_ellipsis_in_middle(self):
-        want = "red\n(...)\nblue\n"
+        want = "red\n<...>\nblue\n"
         got = "red\ngreen\nblue\n"
         result = self.checker.check_output(
             want, got, doctest2.ELLIPSIS)
