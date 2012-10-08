@@ -96,7 +96,7 @@ the third could, one hopes, be handled with a bit of regexp cleverness.
 A few essential behaviors could be outlined as follows. First, the new ellipsis
 marker should be able to match all output::
 
-    >>> print(menu)         # doctest: +ELLIPSIS
+    >>> print(menu)
     <...>
 
 This would be equivalent to::
