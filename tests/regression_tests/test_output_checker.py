@@ -104,6 +104,91 @@ class TestEllipsis (TestCheckOutput):
         self.assertTrue(result)
 
 
+class TestOutputDifference (unittest.TestCase):
+    def setUp(self):
+        self.checker = doctest2.OutputChecker()
+
+    def test_something_equal(self):
+        example = doctest2.Example("print(x)", "foo")
+        result = self.checker.output_difference(example, "foo", 0)
+        expected = "\n".join([
+            "Expected:",
+            "    foo",
+            "Got:",
+            "    foo",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_nothing_equal(self):
+        example = doctest2.Example("print(x)", "")
+        result = self.checker.output_difference(example, "", 0)
+        expected = "\n".join([
+            "Expected nothing",
+            "Got nothing\n",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_simple_diff(self):
+        example = doctest2.Example("print(x)", "foo")
+        result = self.checker.output_difference(example, "bar", 0)
+        expected = "\n".join([
+            "Expected:",
+            "    foo",
+            "Got:",
+            "    bar",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_want_something_got_nothing(self):
+        example = doctest2.Example("print(x)", "foo")
+        result = self.checker.output_difference(example, "", 0)
+        expected = "\n".join([
+            "Expected:",
+            "    foo",
+            "Got nothing\n",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_want_nothing_got_something(self):
+        example = doctest2.Example("print(x)", "")
+        result = self.checker.output_difference(example, "foo", 0)
+        expected = "\n".join([
+            "Expected nothing",
+            "Got:",
+            "    foo",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_got_blankline(self):
+        example = doctest2.Example("print(x)", "foo\n<BLANKLINE>\nbar")
+        result = self.checker.output_difference(example, "foo\n\nbar", 0)
+        expected = "\n".join([
+            "Expected:",
+            "    foo",
+            "    <BLANKLINE>",
+            "    bar",
+            "Got:",
+            "    foo",
+            "    <BLANKLINE>",
+            "    bar",
+        ])
+        self.assertEqual(result, expected)
+
+    def test_missing_blankline(self):
+        example = doctest2.Example("print(x)", "foo\n<BLANKLINE>\nbar")
+        result = self.checker.output_difference(example, "foo\nbar", 0)
+        expected = "\n".join([
+            "Expected:",
+            "    foo",
+            "    <BLANKLINE>",
+            "    bar",
+            "Got:",
+            "    foo",
+            "    bar",
+        ])
+        self.assertEqual(result, expected)
+
+
 if __name__ == '__main__':
     pass
 
