@@ -1,18 +1,16 @@
-This is a fork of Ian Bicking's `doctest2`_ repository. After reading his `blog
-post about doctest.js`_, I was inspired to dive in and start looking for ways I
-could help. I think doctest is one of Python's greatest features, but I agree
-with Ian that there are many wrinkles and warts.
+doctest2
+========
 
-I'll see how far I can get on my own, but I would welcome any assistance. I plan
-to keep an eye on any forks of Ian's project, to avoid any duplication of
-effort.
+This project is an effort to make Python's doctest_ module more awesome.
 
 
 Goals
 -----
 
-- Make doctest more awesome
+- Iron out some of the wrinkles and warts in Python's doctest_
 - Retain backward compatibility with existing doctest behavior
+- Distribute as a package installable with pip_
+- Eventually propose a merge into the standard Python distribution
 
 
 Plan
@@ -26,19 +24,33 @@ Plan
 Testing
 -------
 
-For now, just run the test script::
+Testing is mostly done with nose_ at the moment. Tests are in the ``tests``
+directory, and nose configuration is in ``setup.cfg``. Run nose like this::
 
-    $ python test.py
+    $ nosetests
 
-Or if you like verbose output::
-
-    $ python test.py -v
-
-This covers all ``.rst`` files in the ``tests`` directory, as well as doctests
-in ``doctest2.py`` itself.
+There is also a quick-and-dirty ``test.py`` script designed to cover the
+``doctest2.py`` file itself, as well as the ``tests/rst/*.rst`` files that
+describe new features. These should be merged into the nose tests if possible.
 
 
-.. _doctest2: http://github.com/ianb/doctest2
-.. _issues: http://github.com/ianb/doctest2/issues
-.. _blog post about doctest.js: http://blog.ianbicking.org/2012/10/02/why-doctest-js-is-better-than-pythons-doctest/
+Credits
+-------
 
+- `Ian Bicking`_ got it started
+- `Eric Pierce`_ is continuing it
+
+
+License
+-------
+
+This software is licensed under the Python Software Foundation License
+(`PSFL`_).
+
+.. _doctest: http://docs.python.org/library/doctest.html
+.. _pip: http://www.pip-installer.org/en/latest/index.html
+.. _nose: https://nose.readthedocs.org/en/latest/
+.. _Ian Bicking: http://ianbicking.appspot.com/
+.. _Eric Pierce: http://github.com/wapcaplet
+.. _issues: http://github.com/wapcaplet/doctest2/issues
+.. _PSFL: http://docs.python.org/license.html

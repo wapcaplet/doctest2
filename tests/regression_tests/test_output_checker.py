@@ -1,6 +1,3 @@
-"""Unit tests for regression-testing the OutputChecker class.
-"""
-
 import unittest
 import doctest2
 
